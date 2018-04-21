@@ -22,6 +22,4 @@ def solution(H):
         elif h > block_stack[-1]:
             block_stack.append(h)
             nb_blocks += 1
-        else:
-            print("???")
     return nb_blocks

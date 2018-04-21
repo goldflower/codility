@@ -1,6 +1,9 @@
-
+"""
+'(' = +1, ')' = -1
+if become negative in the middle, return 0
+just read code for other conditions
+"""
 def solution(S):
-    # write your code in Python 3.6
     count = 0
     for s in S:
         if s == '(':

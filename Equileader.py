@@ -1,20 +1,30 @@
+"""
+first, we have to know there's at most 1 leader in a sequence
+1. decide which element is the possible leader (with max count)
+2. if it's leader in A, goto 3., else return 0
+3. iterate once to check if the leader is the leader in both sub-sequences
+"""
 
+from collections import Counter
 def solution(A):
-    # write your code in Python 2.7
-    size = len(A)
-    cnt, cnt1, s, ans = 0, 0, 0, 0
-    for i in A:
-        if 0 == cnt:
-            s = i
-        if s == i:
-            cnt += 1
-        else:
-            cnt -= 1
-    cnt = A.count(s)
-    if cnt > size // 2: # i
-        for i in range(size): 
-            if A[i] == s:
-                cnt1 += 1
-            if cnt1 > (i + 1) // 2 and cnt - cnt1 > (size - 1 - i) // 2:
+    c = Counter(A)
+    max_element, max_count = c.most_common(1)[0]
+    ans = 0
+    if len(A) // 2 >= max_count:
+        return 0
+    left_count = right_count = 0
+    
+    for i, element in enumerate(A):
+        left_length = i+1
+        right_length = len(A) - i - 1
+        if element == max_element:
+            left_count += 1
+            right_count = max_count - left_count
+            if ((left_length // 2 < left_count) and
+                (right_length // 2 < right_count)):
                 ans += 1
     return ans
+            
+                
+        
+
